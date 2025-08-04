@@ -7,7 +7,7 @@ N_CLASS=200
 OUTDIR=outputs/${DATASET}/10-task
 
 # hard coded inputs
-GPUID='0'
+GPUID='0 1'
 CONFIG=configs/cifar-100_prompt.yaml
 CONFIG_FT=configs/cifar-100_ft.yaml
 REPEAT=1
@@ -28,13 +28,14 @@ python -u run.py --config $CONFIG --gpuid $GPUID --repeat $REPEAT --overwrite $O
     --learner_type prompt --learner_name CODAPrompt \
     --prompt_param 100 8 0.0 \
     --log_dir ${OUTDIR}/coda-p
-"""
+
 # DualPrompt
 #
 # prompt parameter args:
 #    arg 1 = e-prompt pool size (# tasks)
 #    arg 2 = e-prompt pool length
 #    arg 3 = g-prompt pool length
+
 python -u run.py --config $CONFIG --gpuid $GPUID --repeat $REPEAT --overwrite $OVERWRITE \
     --learner_type prompt --learner_name DualPrompt \
     --prompt_param 10 20 6 \
@@ -65,4 +66,4 @@ python -u run.py --config $CONFIG_FT --gpuid $GPUID --repeat $REPEAT --overwrite
 python -u run.py --config $CONFIG_FT --gpuid $GPUID --repeat $REPEAT --overwrite $OVERWRITE \
     --learner_type default --learner_name NormalNN --upper_bound_flag \
     --log_dir ${OUTDIR}/offline
-"""
+
