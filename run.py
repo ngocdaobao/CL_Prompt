@@ -41,6 +41,8 @@ def create_args():
     # Config Arg
     parser.add_argument('--config', type=str, default="configs/config.yaml",
                          help="yaml experiment config input")
+    
+    print(f"Using GPU IDs: {args.gpuid}")
 
     return parser
 
