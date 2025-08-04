@@ -39,16 +39,17 @@ def create_args():
                          help="e prompt pool size, e prompt length, g prompt length")
 
     # Config Arg
-    parser.add_argument('--config', type=str, default="configs/config.yaml",
+    parser.add_argument('--config', type=str, default="configs/cifar-100_prompt.yaml",
                          help="yaml experiment config input")
     
-    print(f"Using GPU IDs: {args.gpuid}")
+    
 
     return parser
 
 def get_args(argv):
     parser=create_args()
     args = parser.parse_args(argv)
+    print(f"Using GPU IDs: {args.gpuid}")
     config = yaml.load(open(args.config, 'r'), Loader=yaml.Loader)
     config.update(vars(args))
     return argparse.Namespace(**config)
