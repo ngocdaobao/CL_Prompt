@@ -147,6 +147,10 @@ if __name__ == '__main__':
         # train model
         avg_metrics = trainer.train(avg_metrics)  
 
+        # clear GPU memory
+        torch.cuda.empty_cache()
+        torch.cuda.ipc_collect()
+        
         # evaluate model
         avg_metrics = trainer.evaluate(avg_metrics)    
 
