@@ -150,7 +150,7 @@ if __name__ == '__main__':
         # clear GPU memory
         torch.cuda.empty_cache()
         torch.cuda.ipc_collect()
-        
+        os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
         # evaluate model
         avg_metrics = trainer.evaluate(avg_metrics)    
 

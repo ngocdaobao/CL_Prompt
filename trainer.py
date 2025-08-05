@@ -151,7 +151,11 @@ class Trainer:
 
         # for each task
         for i in range(self.max_task):
-
+            # clear GPU memory
+            torch.cuda.empty_cache()
+            torch.cuda.ipc_collect()
+            os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+            ###
             # save current task index
             self.current_t_index = i
 
@@ -247,6 +251,11 @@ class Trainer:
         return {'global': avg_acc_all,'pt': avg_acc_pt,'pt-local': avg_acc_pt_local}
 
     def evaluate(self, avg_metrics):
+        # clear GPU memory
+        torch.cuda.empty_cache()
+        torch.cuda.ipc_collect()
+        os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+        ###
 
         self.learner = learners.__dict__[self.learner_type].__dict__[self.learner_name](self.learner_config)
 
